@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 function AdminDashboard() {
   const [doctors, setDoctors] = useState<any[]>([
     { id: 1, name: 'Dr. Smith', specialization: 'Cardiologist' },
