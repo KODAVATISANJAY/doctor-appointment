@@ -47,7 +47,7 @@ function AdminDashboard() {
     start_time: ''
   });
 
-  const apiUrl = import.meta.env.VITE_API_URL || ''/api'';
+  const apiUrl = import.meta.env.VITE_API_URL || '/api';';
 
   useEffect(() => {
     const fetchData = async () => {
