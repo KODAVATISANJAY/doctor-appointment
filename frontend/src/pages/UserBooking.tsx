@@ -1,5 +1,14 @@
 import { useState } from 'react';
 
+declare global {
+  interface ImportMeta {
+    readonly env: {
+      readonly VITE_API_URL: string;
+      [key: string]: string;
+    };
+  }
+}
+
 interface BookingFormData {
   patientName: string;
   patientEmail: string;
@@ -43,8 +52,7 @@ function UserBooking() {
 
   // Get API URL from environment or use localhost as fallback
   const getApiUrl = () => {
-const apiUrl = (import.meta.env as any).VITE_API_URL;    return apiUrl ? `${apiUrl}/api/appointments/book` : 'http://localhost:5000/api/appointments/book';
-  };
+const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:5000/api/appointments/book'  };
 
   // Mock response for offline testing
   const getMockResponse = (formData: BookingFormData) => {
