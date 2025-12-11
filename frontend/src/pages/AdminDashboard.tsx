@@ -1,10 +1,10 @@
 import  { useState } from 'react'
 function AdminDashboard() {
-  const [doctors, setDoctors] = useState<any[]>([
+  const [doctors] = useState<any[]>([
     { id: 1, name: 'Dr. Smith', specialization: 'Cardiologist' },
     { id: 2, name: 'Dr. Johnson', specialization: 'Dentist' }
   ])
-  const [appointments, setAppointments] = useState<any[]>([])
+  const [appointments] = useState<any[]>([])
 
   return (
     <main>
