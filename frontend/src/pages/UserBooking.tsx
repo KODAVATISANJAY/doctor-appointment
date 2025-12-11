@@ -1,8 +1,7 @@
-import  { React, useState } from 'react'
-function UserBooking() {
-  const [doctors, setDoctors] = useState<any[]>([])
-  const [loading, setLoading] = useState(false)
-  const [selectedDate, setSelectedDate] = useState('')
+import { useState } from 'react'
+  function UserBooking() {
+ const [doctors] = useState<any[]>([])
+   const [selectedDate, setSelectedDate] = useState('')
   const [selectedDoctor, setSelectedDoctor] = useState('')
 
   const handleBook = async () => {
