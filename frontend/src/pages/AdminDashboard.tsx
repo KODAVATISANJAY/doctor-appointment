@@ -30,7 +30,6 @@ function AdminDashboard() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [showDoctorForm, setShowDoctorForm] = useState(false);
-  const [showSlotForm, setShowSlotForm] = useState(false);
   const [doctorForm, setDoctorForm] = useState({
     name: '',
     specialization: '',
@@ -38,11 +37,6 @@ function AdminDashboard() {
     phone: '',
     experience_years: 0,
     clinic_name: ''
-  });
-  const [slotForm, setSlotForm] = useState({
-    doctor_id: '',
-    date: '',
-    start_time: ''
   });
 
   const apiBase = '/api';
@@ -89,24 +83,6 @@ function AdminDashboard() {
       }
     } catch (err: any) {
       setError(err?.message || 'Failed to create doctor');
-    }
-  };
-
-  const handleCreateSlot = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const response = await fetch(`${apiBase}/slots`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(slotForm)
-      });
-      
-      if (response.ok) {
-        setSlotForm({ doctor_id: '', date: '', start_time: '' });
-        setShowSlotForm(false);
-      }
-    } catch (err: any) {
-      setError(err?.message || 'Failed to create slot');
     }
   };
 
