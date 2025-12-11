@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 function UserBooking() {
   const [doctors, setDoctors] = useState<any[]>([])
   const [loading, setLoading] = useState(false)
