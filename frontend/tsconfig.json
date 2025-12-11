@@ -12,7 +12,6 @@
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-"jsx": "react"  },
-  "include": ["src"],
+"jsx": "react-jsx"  "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
