@@ -51,7 +51,7 @@ function UserBooking() {
   };
 
   // Get API URL from environment or use localhost as fallback
-  consconst getApiUrl = () => import.meta.env.VITE_API_URL || 'http://localhost:5000/api/appointments/book';
+  const getApiUrl = () => import.meta.env.VITE_API_URL || 'http://localhost:5000/api/appointments/book';
   // Mock response for offline testing
   const getMockResponse = (formData: BookingFormData) => {
     return {
