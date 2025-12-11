@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS appointments (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   expires_at TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+   consultation_fee DECIMAL(10,2) DEFAULT 0.00
 );
 
 -- Create indexes for better performance
