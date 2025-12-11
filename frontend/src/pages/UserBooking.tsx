@@ -1,6 +1,5 @@
 import { useState } from 'react'
   function UserBooking() {
- const [doctors] = useState<any[]>([])
    const [selectedDate, setSelectedDate] = useState('')
   const [selectedDoctor, setSelectedDoctor] = useState('')
 
