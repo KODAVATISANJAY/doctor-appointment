@@ -14,5 +14,4 @@
     "noFallthroughCasesInSwitch": true,
 "jsx": "react-jsx"
   },
-  "references": [{ "path": "./tsconfig.node.json" }]
 }
