@@ -51,7 +51,7 @@ function AdminDashboard() {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
+      try 
         setLoading(true);
         setError('');
         
