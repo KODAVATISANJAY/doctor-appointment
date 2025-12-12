@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react';
-
+import { useState, useEffect, ChangeEvent, FormEvent, ReactElement, CSSProperties } from 'react';
 interface Doctor {
   id: string;
   name: string;
