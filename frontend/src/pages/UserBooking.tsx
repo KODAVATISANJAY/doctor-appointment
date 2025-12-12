@@ -1,5 +1,4 @@
-import { useState } from 'react';
-
+import { useState, useEffect } from 'react';
 declare global {
   interface ImportMeta {
     readonly env: {
@@ -19,6 +18,21 @@ interface BookingFormData {
   reason: string;
 }
 
+interface UserBookingHistory {
+ id: string;
+ booking: BookingFormData;
+ appointmentId: string;
+ status: string;
+ createdAt: string;
+}
+
+interface UserDetails {
+ patientName: string;
+ patientEmail: string;
+ patientPhone: string;
+ bookingHistory: UserBookingHistory[];
+}
+
 function UserBooking() {
   const [formData, setFormData] = useState<BookingFormData>({
     patientName: '',
@@ -33,6 +47,13 @@ function UserBooking() {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [bookingData, setBookingData] = useState<any>(null);
+   const [userDetails, setUserDetails] = useState<UserDetails>({
+ patientName: '',
+ patientEmail: '',
+ patientPhone: '',
+ bookingHistory: []
+ });
+ const [bookingHistory, setBookingHistory] = useState<UserBookingHistory[]>([]);
 
   const doctors = [
     { id: 'rajesh-kumar', name: 'Dr. Rajesh Kumar', specialization: 'Cardiologist' },
@@ -41,6 +62,45 @@ function UserBooking() {
     { id: 'neha-gupta', name: 'Dr. Neha Gupta', specialization: 'Pediatrician' },
     { id: 'vikram-singh', name: 'Dr. Vikram Singh', specialization: 'Orthopedic' }
   ];
+
+   // Load user details from localStorage on component mount
+ useEffect(() => {
+ const savedUserDetails = localStorage.getItem('userBookingDetails');
+ if (savedUserDetails) {
+ try {
+ const parsed = JSON.parse(savedUserDetails);
+ setUserDetails(parsed);
+ setBookingHistory(parsed.bookingHistory || []);
+ } catch (err) {
+ console.log('No saved user details found');
+ }
+ }
+ }, []);
+
+ // Save user booking details to localStorage
+ const saveUserDetails = (booking: UserBookingHistory) => {
+ const updated = {
+ ...userDetails,
+ bookingHistory: [...userDetails.bookingHistory, booking]
+ };
+ setUserDetails(updated);
+ setBookingHistory(updated.bookingHistory);
+ localStorage.setItem('userBookingDetails', JSON.stringify(updated));
+ };
+
+ // Get user booking history from localStorage
+ const getUserBookingHistory = (): UserBookingHistory[] => {
+ const saved = localStorage.getItem('userBookingDetails');
+ if (saved) {
+ try {
+ const parsed = JSON.parse(saved);
+ return parsed.bookingHistory || [];
+ } catch (err) {
+ return [];
+ }
+ }
+ return [];
+ };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -101,6 +161,22 @@ function UserBooking() {
         const data = await response.json();
         setMessage(`✓ Appointment booked successfully! Your appointment ID: ${data.data.id}`);
         setBookingData(data.data);
+                     // Save user details to localStorage
+             const historyEntry: UserBookingHistory = {
+               id: `BOOKING-${Date.now()}`,
+               booking: formData,
+               appointmentId: data.data.id,
+               status: 'CONFIRMED',
+               createdAt: new Date().toISOString()
+             };
+             saveUserDetails(historyEntry);
+             // Also update formData in userDetails
+             setUserDetails(prev => ({
+               ...prev,
+               patientName: formData.patientName,
+               patientEmail: formData.patientEmail,
+               patientPhone: formData.patientPhone
+             }));
       } else {
         throw new Error('API response failed');
       }
@@ -110,6 +186,22 @@ function UserBooking() {
       const mockData = getMockResponse(formData);
       setMessage(`✓ Test booking successful (Backend deployment pending). Your appointment ID: ${mockData.id}`);
       setBookingData(mockData);
+                   // Save user details for mock response
+             const mockHistoryEntry: UserBookingHistory = {
+               id: `BOOKING-${Date.now()}`,
+               booking: formData,
+               appointmentId: mockData.id,
+               status: 'CONFIRMED',
+               createdAt: new Date().toISOString()
+             };
+             saveUserDetails(mockHistoryEntry);
+             // Also update formData in userDetails
+             setUserDetails(prev => ({
+               ...prev,
+               patientName: formData.patientName,
+               patientEmail: formData.patientEmail,
+               patientPhone: formData.patientPhone
+             }));
     } finally {
       setLoading(false);
       // Reset form after booking
