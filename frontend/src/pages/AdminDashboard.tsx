@@ -117,6 +117,14 @@ function AdminDashboard() {
                   <input type="tel" value={doctorForm.phone} onChange={(e) => setDoctorForm({...doctorForm, phone: e.target.value})} style={{ width: '100%', padding: '8px', marginTop: '5px' }} />
                 </div>
                 <button type="submit" style={{ padding: '10px 20px', background: '#28a745', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>Create</button>
+                 <div style={{ marginBottom: '15px' }}>
+                 <label>Experience Years:</label>
+                 <input type="number" value={doctorForm.experience_years} onChange={(e) => setDoctorForm({...doctorForm, experience_years: parseInt(e.target.value) || 0})} style={{ width: '100%', padding: '8px', marginTop: '5px' }} />
+                 </div>
+                 <div style={{ marginBottom: '15px' }}>
+                 <label>Clinic Name:</label>
+                 <input type="text" value={doctorForm.clinic_name} onChange={(e) => setDoctorForm({...doctorForm, clinic_name: e.target.value})} style={{ width: '100%', padding: '8px', marginTop: '5px' }} />
+                 </div>
               </form>
             )}
           </div>
@@ -130,6 +138,9 @@ function AdminDashboard() {
                     <h3>{doc.name}</h3>
                     <p><strong>Specialization:</strong> {doc.specialization}</p>
                     <p><strong>Email:</strong> {doc.email}</p>
+                     <p><strong>Phone:</strong> {doc.phone}</p>
+                 <p><strong>Experience Years:</strong> {doc.experience_years}</p>
+                 <p><strong>Clinic Name:</strong> {doc.clinic_name}</p>
                   </div>
                 ))}
               </div>
