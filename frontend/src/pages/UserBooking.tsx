@@ -440,6 +440,38 @@ function UserBooking() {
             </div>
           )}
         </div>
+
+         {/* Display Saved User Details Section */}
+ {userDetails.patientName && (
+ <div style={{ marginTop: '40px', borderTop: '2px solid #ddd', paddingTop: '20px' }}>
+ <h2>Saved User Details</h2>
+ <div style={{ backgroundColor: '#f9f9f9', padding: '20px', borderRadius: '8px', marginBottom: '20px' }}>
+ <p><strong>Name:</strong> {userDetails.patientName}</p>
+ <p><strong>Email:</strong> {userDetails.patientEmail}</p>
+ <p><strong>Phone:</strong> {userDetails.patientPhone}</p>
+ </div>
+ 
+ {/* Booking History Section */}
+ {userDetails.bookingHistory.length > 0 && (
+ <div>
+ <h3>Your Booking History ({userDetails.bookingHistory.length})</h3>
+ <div style={{ display: 'grid', gap: '15px' }}>
+ {userDetails.bookingHistory.map((booking) => (
+ <div key={booking.id} style={{ border: '1px solid #ddd', padding: '15px', borderRadius: '8px', backgroundColor: '#f0f8ff' }}>
+ <p><strong>Appointment ID:</strong> {booking.appointmentId}</p>
+ <p><strong>Doctor:</strong> {getDoctorName(booking.booking.selectedDoctor)}</p>
+ <p><strong>Date:</strong> {booking.booking.selectedDate}</p>
+ <p><strong>Time:</strong> {booking.booking.appointmentTime}</p>
+ <p><strong>Status:</strong> <span style={{ backgroundColor: '#d4edda', padding: '2px 8px', borderRadius: '4px', color: '#155724' }}>{booking.status}</span></p>
+ <p><strong>Booked on:</strong> {new Date(booking.createdAt).toLocaleDateString()}</p>
+ {booking.booking.reason && <p><strong>Reason:</strong> {booking.booking.reason}</p>}
+ </div>
+ ))}
+ </div>
+ </div>
+ )}
+ </div>
+ )}
       </section>
     </main>
   );
