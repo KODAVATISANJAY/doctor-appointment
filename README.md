@@ -202,3 +202,15 @@ If you find this project helpful, please consider giving it a star ⭐
 ---
 
 **Made with ❤️ for healthcare booking solutions**
+
+
+## 📋 Future Enhancements
+
+- [ ] Multi-language support (i18n)
+- [ ] Telemedicine/video consultation integration
+- [ ] AI-powered doctor recommendation engine
+- [ ] Health records and medical history management
+- [ ] Integration with health insurance providers
+- [ ] Mobile app development (React Native)
+- [ ] Blockchain-based health records
+- [ ] Integration with lab test providers
